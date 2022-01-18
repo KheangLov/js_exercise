@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function createELe(wrapper, { lb, io }) {
+            let para = document.createElement("p");
+            let strong = document.createElement("strong");
+            let text = document.createTextNode(lb);
+            let span = document.createElement("span");
+            let spanText = document.createTextNode(io);
+
+            strong.appendChild(text);
+            span.appendChild(spanText);
+            para.appendChild(strong);
+            para.appendChild(span);
+            wrapper.appendChild(para);
+        }
+
+        let wrapper = document.createElement("div");
+        wrapper.style.border = '3px solid #222';
+        wrapper.style.borderRadius = '6px';
+        wrapper.style.padding = '5px 15px';
+        wrapper.style.marginBottom = '15px';
+
+        createELe(wrapper, {
+            lb: "Email: ",
+            io: "lovsokheang@gmail.com",
+        });
+
+        document.body.appendChild(wrapper);
+    </script>
+</body>
+</html>

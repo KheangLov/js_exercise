@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="input_data">
+    <div id="output"></div>
+    
+    <script>
+        const hundred = 'រយ';
+        const teen = 'សិប';
+        const five = 'ប្រាំ';
+        const teenNumbers = ['ដប់', 'ម្ភៃ', 'សាម', 'សែ', 'ហា', 'ហុក', 'ចិត', 'បែ៉ត', 'កៅ'];
+        const khNumbers = ['', 'មួយ', 'ពីរ', 'បី', 'បួន', five];
+
+        document.getElementById('input_data').addEventListener('input', ({ target: { value } }) => {
+            document.getElementById('output').innerHTML = numberToText(value);
+        });
+
+        function underTen(value) {
+            if (value > 5) {
+                return `${five}${khNumbers[parseInt(value) - 5]}`;
+            }
+            return khNumbers[value];
+        }
+
+        function hundredFunc(value) {
+            value = parseInt(value).toString();
+            const num = parseInt(`${value[1]}${value[2]}`);
+            return `${underTen(value[0])}${hundred}${num < 10 ? underTen(num) : (num >= 10 ? teenFunc(num) : '')}`;
+        }
+
+        function teenFunc(value) {
+            const somnol = value % 10;
+            const v = value - somnol;
+            const num = v - 10;
+
+            return `${teenNumbers[num / 10]}${v > 20 ? teen : ''}${underTen(somnol)}`;
+        }
+
+        function numberToText(value) {
+            if (value.length == 1 && value == 0) {
+                return 'សូន្យ';
+            }
+
+            if (value >= 100) {
+                return hundredFunc(value);
+            }
+            
+            if (value >= 10) {
+                return teenFunc(value);
+            }
+
+            return underTen(value);
+        }
+    </script>
+</body>
+</html>
