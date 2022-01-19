@@ -21,19 +21,30 @@
             para.appendChild(span);
             wrapper.appendChild(para);
         }
-
+        let arrays = [
+                        { name: "Bill Ly", age: 25, email: "billy.ly@gmail.com" }, 
+                        { name: "Thorn Sonita", age: 21, email: "sonita.thorn@gmail.com" }, 
+                        { name: "Lov Kheang", age: 22, email: "kheang.lov@gmail.com" },
+                        { name: "Bill Ly", age: 25, email: "billy.ly@gmail.com" }, 
+                        { name: "Thorn Sonita", age: 21, email: "sonita.thorn@gmail.com" }, 
+                        { name: "Lov Kheang", age: 22, email: "kheang.lov@gmail.com" }
+                    ]; 
         let wrapper = document.createElement("div");
         wrapper.style.border = '3px solid #222';
         wrapper.style.borderRadius = '6px';
         wrapper.style.padding = '5px 15px';
         wrapper.style.marginBottom = '15px';
 
-        createELe(wrapper, {
-            lb: "Email: ",
-            io: "lovsokheang@gmail.com",
+        arrays.forEach(array => {
+            for (let key in array) {
+                createELe(wrapper, {
+                    lb: `${key}: `,
+                    io: `${array[key]}`,
+                });
+                document.body.appendChild(wrapper);
+            }
         });
-
-        document.body.appendChild(wrapper);
+        
     </script>
 </body>
 </html>
