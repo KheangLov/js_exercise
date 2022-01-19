@@ -11,6 +11,7 @@
     <div id="output"></div>
     
     <script>
+        const thousands = 'ពាន់';
         const hundred = 'រយ';
         const teen = 'សិប';
         const five = 'ប្រាំ';
@@ -26,6 +27,12 @@
                 return `${five}${khNumbers[parseInt(value) - 5]}`;
             }
             return khNumbers[value];
+        }
+
+        function thousandsFunc(value) {
+            value = parseInt(value).toString();
+            const num = parseInt(`${value[1]}${value[2]}${value[3]}`);
+            return `${underTen(value[0])}${thousands}${underTen(value[1])}${hundred}${num < 10 ? underTen(num) : ((num / 10) >= 10 ? teenFunc(num) : '')}`;
         }
 
         function hundredFunc(value) {
@@ -47,14 +54,17 @@
                 return 'សូន្យ';
             }
 
+            if (value >= 1000) {
+                return thousandsFunc(value);
+            }
+
             if (value >= 100) {
                 return hundredFunc(value);
             }
-            
+
             if (value >= 10) {
                 return teenFunc(value);
             }
-
             return underTen(value);
         }
     </script>
