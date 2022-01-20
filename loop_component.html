@@ -11,6 +11,7 @@
         function createELe(wrapper, { lb, io }) {
             let para = document.createElement("p");
             let strong = document.createElement("strong");
+            strong.style.textTransform = "capitalize";
             let text = document.createTextNode(lb);
             let span = document.createElement("span");
             let spanText = document.createTextNode(io);
@@ -21,28 +22,24 @@
             para.appendChild(span);
             wrapper.appendChild(para);
         }
-        let arrays = [
-                        { name: "Bill Ly", age: 25, email: "billy.ly@gmail.com" }, 
-                        { name: "Thorn Sonita", age: 21, email: "sonita.thorn@gmail.com" }, 
-                        { name: "Lov Kheang", age: 22, email: "kheang.lov@gmail.com" },
-                        { name: "Bill Ly", age: 25, email: "billy.ly@gmail.com" }, 
-                        { name: "Thorn Sonita", age: 21, email: "sonita.thorn@gmail.com" }, 
-                        { name: "Lov Kheang", age: 22, email: "kheang.lov@gmail.com" }
-                    ]; 
-        let wrapper = document.createElement("div");
-        wrapper.style.border = '3px solid #222';
-        wrapper.style.borderRadius = '6px';
-        wrapper.style.padding = '5px 15px';
-        wrapper.style.marginBottom = '15px';
 
-        arrays.forEach(array => {
-            for (let key in array) {
-                createELe(wrapper, {
-                    lb: `${key}: `,
-                    io: `${array[key]}`,
-                });
-                document.body.appendChild(wrapper);
-            }
+        let arrays = [
+            { name: "Bill Ly", age: 25, email: "billy.ly@gmail.com" }, 
+            { name: "Thorn Sonita", age: 21, email: "sonita.thorn@gmail.com" }, 
+            { name: "Lov Kheang", age: 22, email: "kheang.lov@gmail.com" },
+            { name: "Bill Ly", age: 25, email: "billy.ly@gmail.com" }, 
+            { name: "Thorn Sonita", age: 21, email: "sonita.thorn@gmail.com" }, 
+            { name: "Lov Kheang", age: 22, email: "kheang.lov@gmail.com" }
+        ];
+
+        arrays.forEach(obj => {
+            let wrapper = document.createElement("div");
+            wrapper.style.border = '3px solid #222';
+            wrapper.style.borderRadius = '6px';
+            wrapper.style.padding = '5px 15px';
+            wrapper.style.marginBottom = '15px';
+            Object.keys(obj).forEach(key => createELe(wrapper, { lb: `${key}: `, io: `${obj[key]}` }));
+            document.body.appendChild(wrapper);
         });
         
     </script>

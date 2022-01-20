@@ -19,6 +19,10 @@
         const khNumbers = ['', 'មួយ', 'ពីរ', 'បី', 'បួន', five];
 
         document.getElementById('input_data').addEventListener('input', ({ target: { value } }) => {
+            if (!value) {
+                e.preventDefault();
+                return false;
+            }
             document.getElementById('output').innerHTML = numberToText(value);
         });
 
@@ -29,10 +33,18 @@
             return khNumbers[value];
         }
 
+        // Code oun Ta
+        // function thousandsFunc(value) {
+        //     value = parseInt(value).toString();
+        //     const num = parseInt(`${value[1]}${value[2]}${value[3]}`);
+        //     return `${underTen(value[0])}${thousands}${underTen(value[1])}${hundred}${num < 10 ? underTen(num) : ((num / 10) >= 10 ? teenFunc(num) : '')}`;
+        // }
+
+        // Code bong Kheang
         function thousandsFunc(value) {
             value = parseInt(value).toString();
             const num = parseInt(`${value[1]}${value[2]}${value[3]}`);
-            return `${underTen(value[0])}${thousands}${underTen(value[1])}${hundred}${num < 10 ? underTen(num) : ((num / 10) >= 10 ? teenFunc(num) : '')}`;
+            return `${underTen(value[0])}${thousands}${num >= 100 ? hundredFunc(num) : (num < 10 ? underTen(num) : (num >= 10 ? teenFunc(num) : ''))}`;
         }
 
         function hundredFunc(value) {
