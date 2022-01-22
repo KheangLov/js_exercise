@@ -11,6 +11,9 @@
     <div id="output"></div>
     
     <script>
+        const million = "លាន";
+        const hundred_thousand = "សែន";
+        const ten_thousands = 'មុឺន';
         const thousands = 'ពាន់';
         const hundred = 'រយ';
         const teen = 'សិប';
@@ -33,14 +36,25 @@
             return khNumbers[value];
         }
 
-        // Code oun Ta
-        // function thousandsFunc(value) {
-        //     value = parseInt(value).toString();
-        //     const num = parseInt(`${value[1]}${value[2]}${value[3]}`);
-        //     return `${underTen(value[0])}${thousands}${underTen(value[1])}${hundred}${num < 10 ? underTen(num) : ((num / 10) >= 10 ? teenFunc(num) : '')}`;
-        // }
+        function millionFunc(value){
+            value = parseInt(value).toString();
+            const num = parseInt(`${value[1]}${value[2]}${value[3]}${value[4]}${value[5]}${value[6]}`);
+            return `${underTen(value[0])}${million}${num >= 100000 ? hundredThousandsFunc(num) : (num >= 10000 ? tenThousandsFunc(num) : (num >= 1000 ? thousandsFunc(num) : (num >= 100 ? hundredFunc(num) : (num < 10 ? underTen(num) : (num >= 10 ? teenFunc(num) : '')))))}`;
+        }
 
-        // Code bong Kheang
+        function hundredThousandsFunc(value){
+            value = parseInt(value).toString();
+            const num = parseInt(`${value[1]}${value[2]}${value[3]}${value[4]}${value[5]}`);
+            return `${underTen(value[0])}${hundred_thousand}${num >= 10000 ? tenThousandsFunc(num) : (num >= 1000 ? thousandsFunc(num) : (num >= 100 ? hundredFunc(num) : (num < 10 ? underTen(num) : (num >= 10 ? teenFunc(num) : ''))))}`;
+        }
+
+        function tenThousandsFunc(value){
+            value = parseInt(value).toString();
+            const num = parseInt(`${value[1]}${value[2]}${value[3]}${value[4]}`);
+            return `${underTen(value[0])}${ten_thousands}${num >= 1000 ? thousandsFunc(num) : (num >= 100 ? hundredFunc(num) : (num < 10 ? underTen(num) : (num >= 10 ? teenFunc(num) : '')))}`;
+        }
+
+        // Code bong Kheang                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
         function thousandsFunc(value) {
             value = parseInt(value).toString();
             const num = parseInt(`${value[1]}${value[2]}${value[3]}`);
@@ -64,6 +78,18 @@
         function numberToText(value) {
             if (value.length == 1 && value == 0) {
                 return 'សូន្យ';
+            }
+
+            if (value >= 1000000) {
+                return millionFunc(value);
+            }
+
+            if (value >= 100000) {
+                return hundredThousandsFunc(value);
+            }
+
+            if (value >= 10000) {
+                return tenThousandsFunc(value);
             }
 
             if (value >= 1000) {
